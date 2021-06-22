@@ -1,0 +1,24 @@
+.container {
+  position: relative;
+
+  margin: 0 auto;
+  padding: 0 ($base * 4);
+
+  display: flex;
+  flex-direction: column;
+  max-width: $max-width;
+
+  @media (max-width: $media-max-sm) {
+    padding: 0 ($base * 3);
+  }
+}
+
+.section-paddings {
+  padding-top: $vertical-padding-xl;
+  padding-bottom: $vertical-padding-xl;
+
+  @media (max-width: $media-max-xxl) {
+    padding-top: $vertical-padding-lg;
+    padding-bottom: $vertical-padding-lg;
+  }
+}

@@ -1,0 +1,25 @@
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    overflow: visible;
+    pointer-events: initial;
+  }
+  100% {
+    opacity: 1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  100% {
+    opacity: 0;
+    overflow: visible;
+    pointer-events: initial;
+  }
+}

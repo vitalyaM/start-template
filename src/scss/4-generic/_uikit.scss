@@ -1,0 +1,37 @@
+//? 1. Your custom variables and variable overwrites.
+$global-color: $color_main;
+$global-font-family: $font-family;
+
+//? 2. Import default variables and available mixins.
+@import '../../../node_modules/uikit/src/scss/variables-theme';
+@import '../../../node_modules/uikit/src/scss/mixins-theme';
+
+//? 3. Your custom mixin overwrites.
+@mixin hook-card() {
+  color: $color_main;
+}
+
+//? 4. Import UIkit.
+// Elements
+@import '../../../node_modules/uikit/src/scss/theme/icon';
+@import '../../../node_modules/uikit/src/scss/components/icon';
+// Common
+@import '../../../node_modules/uikit/src/scss/theme/animation';
+@import '../../../node_modules/uikit/src/scss/components/animation';
+@import '../../../node_modules/uikit/src/scss/theme/close';
+@import '../../../node_modules/uikit/src/scss/components/close';
+// JavaScript
+@import '../../../node_modules/uikit/src/scss/theme/accordion';
+@import '../../../node_modules/uikit/src/scss/components/accordion';
+@import '../../../node_modules/uikit/src/scss/theme/modal';
+@import '../../../node_modules/uikit/src/scss/components/modal';
+@import '../../../node_modules/uikit/src/scss/theme/tab';
+@import '../../../node_modules/uikit/src/scss/components/tab';
+@import '../../../node_modules/uikit/src/scss/components/switcher';
+@import '../../../node_modules/uikit/src/scss/theme/search';
+@import '../../../node_modules/uikit/src/scss/components/search';
+// Utilities
+@import '../../../node_modules/uikit/src/scss/theme/utility';
+@import '../../../node_modules/uikit/src/scss/components/utility';
+@import '../../../node_modules/uikit/src/scss/components/flex';
+@import '../../../node_modules/uikit/src/scss/components/visibility';

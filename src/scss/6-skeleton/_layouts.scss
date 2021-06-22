@@ -1,0 +1,50 @@
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+
+  &:active,
+  &:focus {
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+  }
+
+  &::-webkit-scrollbar {
+    width: $scroll_width;
+    height: $base;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $color_scroll_thumb;
+    border-radius: $base;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: darken($color_scroll_thumb, 10%);
+  }
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
+
+  color: $color_main;
+  font-family: $font-family;
+  font-size: $font-size-xs;
+  line-height: 1.5;
+
+  background-color: $bg_color;
+}
+
+main {
+  max-width: 100%;
+  position: relative;
+  flex-grow: 1;
+}

@@ -1,0 +1,35 @@
+.btn {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: ($base * 4) ($base * 10);
+  font-size: $font-size-xxs;
+  font-weight: $fw-bold;
+  line-height: inherit;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: $br_xs;
+  background: transparent;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all $tr_time $tr_type;
+
+  @media (max-width: $media-max-tablet) {
+    padding: ($base * 2) ($base * 4);
+  }
+
+  span {
+    transition: color $tr_time $tr_type;
+  }
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+
+  &:active {
+    transform: translateY(5px) scale(0.95);
+  }
+}

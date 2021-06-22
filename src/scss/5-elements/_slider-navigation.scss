@@ -1,0 +1,51 @@
+.slider-navigation {
+  display: flex;
+  align-items: center;
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 37px;
+    height: 37px;
+    color: $white;
+    background-color: $white_500;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: $tr_time $tr_type;
+
+    @media (max-width: $media-max-tablet) {
+      width: 30px;
+      height: 30px;
+    }
+
+    svg {
+      flex: 0 0 16px;
+      width: 16px;
+      height: 16px;
+
+      path {
+        fill: $color_main;
+      }
+    }
+
+    &:hover:not(.swiper-button-disabled),
+    &:focus:not(.swiper-button-disabled) {
+      border: 1px solid $color_main;
+    }
+
+    &:first-child {
+      margin-right: $base * 5;
+
+      @media (max-width: $media-max-tablet) {
+        margin-right: $base * 4;
+      }
+    }
+
+    &.swiper-button-disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+}

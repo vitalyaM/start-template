@@ -1,0 +1,11 @@
+a {
+  color: $color_main;
+  text-decoration: none;
+  transition: color $tr_time $tr_type;
+
+  &:hover,
+  &:focus {
+    color: inherit;
+    text-decoration: underline;
+  }
+}
