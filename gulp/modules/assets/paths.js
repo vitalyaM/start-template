@@ -25,7 +25,7 @@ export default {
     assets: distPath + 'assets',
   },
   dev: {
-    html: [srcPath + '**/*.html', '!' + srcPath + '**/_*.html'],
+    html: [srcPath + 'templates/**/*.html', '!' + srcPath + 'templates/**/_*.html'],
     scss: srcPath + 'scss/**/*.scss',
     js: srcPath + 'js/*.js',
     images: srcPath + 'img/**/*',
@@ -34,7 +34,7 @@ export default {
     ignores: [srcPath + 'img/**/*.{svg,ico}'],
   },
   watch: {
-    html: srcPath + '**/*.html',
+    html: srcPath + 'templates/**/*.html',
     scss: srcPath + 'scss/**/*.scss',
     js: srcPath + 'js/**/*.js',
     images: srcPath + 'img/**/*.{jpg,png,svg}',

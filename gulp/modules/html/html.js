@@ -1,19 +1,30 @@
-import { src, dest } from 'gulp';
+import { src, dest, lastRun } from 'gulp';
 import paths from '../assets/paths';
-
+import nunjucksInheritance from 'gulp-nunjucks-inheritance';
 import plumber from 'gulp-plumber';
-import fileinclude from "gulp-file-include";
+import nunjucks from 'gulp-nunjucks-render';
 import webphtml from 'gulp-webp-html';
 import htmlhint, { reporter } from 'gulp-htmlhint';
+import rename from 'gulp-rename';
 
-const html = (cb) => {
-  return src(paths.dev.html)
+function html(cb) {
+  return src(paths.dev.html, { base: paths.srcPath, since: lastRun('html') })
     .pipe(plumber())
-    .pipe(fileinclude())
+    .pipe(nunjucksInheritance({ base: paths.srcPath })) // Ищем изменения в зависимостях
+    .pipe(
+      nunjucks({
+        path: paths.srcPath + 'templates',
+      })
+    )
     .pipe(webphtml())
     .pipe(htmlhint())
+    .pipe(
+      rename({
+        dirname: '',
+      })
+    )
     .pipe(reporter())
     .pipe(dest(paths.dist.html));
-};
+}
 
 export default html;
