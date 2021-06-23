@@ -1,13 +1,12 @@
-const gulp = require('gulp');
-const paths = require('./paths');
-const del = require('del');
+import { src, dest } from 'gulp';
+import paths from './paths';
+import del from 'del';
 
 const copyFiles = async () => {
   await del([paths.dist.assets]);
 
-  return gulp
-    .src(paths.dev.assets)
-    .pipe(gulp.dest(paths.dist.assets));
+  return src(paths.dev.assets)
+    .pipe(dest(paths.dist.assets));
 };
 
-module.exports = copyFiles;
+export default copyFiles;

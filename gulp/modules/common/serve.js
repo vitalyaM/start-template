@@ -1,12 +1,11 @@
-const gulp = require('gulp');
-const { watch, series } = gulp;
-const html = require('../html/html');
-const browserSync = require('browser-sync');
-const paths = require('../assets/paths');
-const { styleDev } = require('../styles/sass');
-const { scriptDev } = require('../js/scripts');
-const { webp, copyImages, clearImages } = require('../images/images');
-const copyFiles = require('../assets/files');
+import { watch, series } from 'gulp';
+import html from '../html/html';
+import browserSync from 'browser-sync';
+import paths from '../assets/paths';
+import { styleDev } from '../styles/sass';
+import { scriptDev }  from '../js/scripts';
+import { webp, copyImages, clearImages } from '../images/images';
+import copyFiles from '../assets/files';
 
 const options = {
   server: paths.distPath,
@@ -36,4 +35,4 @@ const serve = (cb) => {
   return cb();
 };
 
-module.exports = { serve };
+export { serve };

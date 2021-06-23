@@ -1,18 +1,18 @@
-const paths = require('../assets/paths');
-const gulp = require('gulp');
-const plumber = require('gulp-plumber');
-const sass = require('gulp-sass');
-const autoprefixer = require('autoprefixer');
-const sourcemaps = require('gulp-sourcemaps');
-const postcss = require('gulp-postcss');
-const cached = require('gulp-cached');
-const dependents = require('gulp-dependents');
-const cleanCSS = require('gulp-clean-css');
-const gulpStylelint = require('gulp-stylelint');
-const rename = require('gulp-rename');
-const webpcss = require("gulp-webpcss");
-const gcmq = require("gulp-group-css-media-queries");
-const browserSync = require('browser-sync');
+import paths from '../assets/paths';
+import { src, dest } from 'gulp';
+import plumber from 'gulp-plumber';
+import sass, { logError } from 'gulp-sass';
+import autoprefixer from 'autoprefixer';
+import { init, write } from 'gulp-sourcemaps';
+import postcss from 'gulp-postcss';
+import cached from 'gulp-cached';
+import dependents from 'gulp-dependents';
+import cleanCSS from 'gulp-clean-css';
+import gulpStylelint from 'gulp-stylelint';
+import rename from 'gulp-rename';
+import webpcss from "gulp-webpcss";
+import gcmq from "gulp-group-css-media-queries";
+import { stream } from 'browser-sync';
 
 const plugins = [
   autoprefixer({
@@ -22,8 +22,7 @@ const plugins = [
 ];
 
 const styleDev = () => {
-  return gulp
-    .src(paths.dev.scss)
+  return src(paths.dev.scss)
     .pipe(plumber())
     .pipe(
       gulpStylelint({
@@ -38,8 +37,8 @@ const styleDev = () => {
     )
     .pipe(cached('scss'))
     .pipe(dependents())
-    .pipe(sourcemaps.init())
-    .pipe(sass({ outputStyle: 'expanded' }).on('error', sass.logError))
+    .pipe(init())
+    .pipe(sass({ outputStyle: 'expanded' }).on('error', logError))
     .pipe(webpcss(
       {
         webpClass: '._webp',
@@ -47,8 +46,8 @@ const styleDev = () => {
       }
     ))
     .pipe(gcmq())
-    .pipe(sourcemaps.write({ includeContent: false }))
-    .pipe(sourcemaps.init({ loadMaps: true }))
+    .pipe(write({ includeContent: false }))
+    .pipe(init({ loadMaps: true }))
     .pipe(
       rename({
         suffix: '.min',
@@ -56,15 +55,14 @@ const styleDev = () => {
     )
     .pipe(postcss(plugins))
 
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(paths.dist.css))
-    .pipe(browserSync.stream());
+    .pipe(write('.'))
+    .pipe(dest(paths.dist.css))
+    .pipe(stream());
 };
 
 const styleProd = () => {
-  return gulp
-    .src(paths.dev.scss)
-    .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+  return src(paths.dev.scss)
+    .pipe(sass({ outputStyle: 'compressed' }).on('error', logError))
     .pipe(webpcss(
       {
         webpClass: '._webp',
@@ -91,7 +89,7 @@ const styleProd = () => {
         suffix: '.min',
       })
     )
-    .pipe(gulp.dest(paths.dist.css));
+    .pipe(dest(paths.dist.css));
 };
 
-module.exports = { styleDev, styleProd };
+export { styleDev, styleProd };

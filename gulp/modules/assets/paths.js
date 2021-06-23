@@ -3,7 +3,7 @@ const { distPath, srcPath } = {
   srcPath: 'src/'
 };
 
-module.exports = {
+export default {
   distPath,
   srcPath,
   clean: distPath,

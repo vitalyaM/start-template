@@ -1,11 +1,11 @@
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const webpack = require('webpack');
-const path = require('path');
-const paths = require('./modules/assets/paths');
+import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
+import { SourceMapDevToolPlugin, NoEmitOnErrorsPlugin } from 'webpack';
+import { join } from 'path';
+import paths from './modules/assets/paths';
 
 const entry = {
-  main: path.join(__dirname, '..', paths.srcPath, 'js', `main.js`),
-  index: path.join(__dirname, '..', paths.srcPath, 'js', `index.js`)
+  main: join(__dirname, '..', paths.srcPath, 'js', `main.js`),
+  index: join(__dirname, '..', paths.srcPath, 'js', `index.js`)
 };
 
 const config = (devMode) => {
@@ -19,7 +19,7 @@ const config = (devMode) => {
 
     optimization: {
       minimizer: devMode
-        ? [new webpack.SourceMapDevToolPlugin(), new webpack.NoEmitOnErrorsPlugin()]
+        ? [new SourceMapDevToolPlugin(), new NoEmitOnErrorsPlugin()]
         : [
           new UglifyJsPlugin({
             cache: true,
@@ -44,4 +44,4 @@ const config = (devMode) => {
   };
 };
 
-module.exports = config;
+export default config;

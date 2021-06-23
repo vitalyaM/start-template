@@ -1,20 +1,19 @@
-const gulp = require('gulp');
-const paths = require('../assets/paths');
+import { src, dest } from 'gulp';
+import paths from '../assets/paths';
 
-const plumber = require('gulp-plumber');
-const fileinclude = require("gulp-file-include");
-const webphtml = require('gulp-webp-html');
-const htmlhint = require('gulp-htmlhint');
+import plumber from 'gulp-plumber';
+import fileinclude from "gulp-file-include";
+import webphtml from 'gulp-webp-html';
+import htmlhint, { reporter } from 'gulp-htmlhint';
 
 const html = (cb) => {
-  return gulp
-    .src(paths.dev.html)
+  return src(paths.dev.html)
     .pipe(plumber())
     .pipe(fileinclude())
     .pipe(webphtml())
     .pipe(htmlhint())
-    .pipe(htmlhint.reporter())
-    .pipe(gulp.dest(paths.dist.html));
+    .pipe(reporter())
+    .pipe(dest(paths.dist.html));
 };
 
-module.exports = html;
+export default html;

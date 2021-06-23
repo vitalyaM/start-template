@@ -1,12 +1,12 @@
-const gulp = require('gulp');
-const paths = require('../assets/paths');
-const del = require('del');
-const cached = require('gulp-cached');
+import paths from '../assets/paths';
+import del from 'del';
+import cache  from 'gulp-cached';
 
 const cleanTask = () => {
-  cached.caches = {};
+  cache.caches = {};
+
 
   return del([paths.clean]);
 };
 
-module.exports = cleanTask;
+export default cleanTask;

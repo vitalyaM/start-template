@@ -1,13 +1,13 @@
-const gulp = require('gulp');
-const imagemin = require('gulp-imagemin');
-const imageminWebp = require('imagemin-webp');
-const plumber = require('gulp-plumber');
-const del = require('del');
-const rename = require('gulp-rename');
-const paths = require('../assets/paths');
+import { src, dest } from 'gulp';
+import imagemin, { mozjpeg, optipng, svgo } from 'gulp-imagemin';
+import imageminWebp from 'imagemin-webp';
+import plumber from 'gulp-plumber';
+import del from 'del';
+import rename from 'gulp-rename';
+import paths from '../assets/paths';
 
 const copyImages = () =>
-  gulp.src([paths.images.src]).pipe(plumber()).pipe(gulp.dest(paths.images.dist));
+  src([paths.images.src]).pipe(plumber()).pipe(dest(paths.images.dist));
 
 const clearImages = async (done) => {
   await del([paths.images.dist], { force: true });
@@ -15,43 +15,39 @@ const clearImages = async (done) => {
 };
 
 const webp = () => {
-  return gulp
-    .src([paths.images.src, '!' + paths.dev.ignores])
+  return src([paths.images.src, '!' + paths.dev.ignores])
     .pipe(plumber())
     .pipe(imagemin([imageminWebp({ quality: 70 })], { verbose: true }))
     .pipe(rename({ extname: '.webp' }))
-    .pipe(gulp.dest(paths.images.webp));
+    .pipe(dest(paths.images.webp));
 };
 
 const imagesMinJpeg = () => {
-  return gulp
-    .src([paths.images.jpeg, '!' + paths.dev.ignores])
+  return src([paths.images.jpeg, '!' + paths.dev.ignores])
     .pipe(
-      imagemin([imagemin.mozjpeg({ quality: 75, progressive: true })], {
+      imagemin([mozjpeg({ quality: 75, progressive: true })], {
         verbose: true,
       })
     )
-    .pipe(gulp.dest(paths.images.dist));
+    .pipe(dest(paths.images.dist));
 };
 
 const imagesMinPng = () => {
-  return gulp
-    .src([paths.images.png, '!' + paths.dev.ignores])
+  return src([paths.images.png, '!' + paths.dev.ignores])
     .pipe(
-      imagemin([imagemin.optipng()], {
+      imagemin([optipng()], {
         verbose: true,
       })
     )
-    .pipe(gulp.dest(paths.images.dist));
+    .pipe(dest(paths.images.dist));
 };
 
 const imagesMinSvg = () => {
-  return gulp
-    .src(paths.images.svg)
+  return src(paths.images.svg)
     .pipe(
       imagemin(
         [
-          imagemin.svgo({
+          svgo({
             plugins: [{ removeViewBox: true }, { cleanupIDs: false }],
           }),
         ],
@@ -60,7 +56,7 @@ const imagesMinSvg = () => {
         }
       )
     )
-    .pipe(gulp.dest(paths.images.dist));
+    .pipe(dest(paths.images.dist));
 };
 
-module.exports = { clearImages, copyImages, webp, imagesMinJpeg, imagesMinSvg, imagesMinPng };
+export { clearImages, copyImages, webp, imagesMinJpeg, imagesMinSvg, imagesMinPng };

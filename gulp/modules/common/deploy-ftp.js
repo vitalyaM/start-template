@@ -1,31 +1,30 @@
-const gulp = require('gulp');
-const gutil = require('gutil');
-const ftp = require('vinyl-ftp');
-const paths = require('../assets/paths');
-const settings = require('../../../settings');
+import { src } from 'gulp';
+import { log as _log } from 'gutil';
+import { create } from 'vinyl-ftp';
+import paths from '../assets/paths';
+import { projectName } from '../../../settings';
 
 require('dotenv').config();
 
 function getFtpConnection() {
-  return ftp.create({
+  return create({
     host: process.env.FTP_HOST,
     port: 21,
     user: process.env.FTP_USER,
     password: process.env.FTP_PASSWORD,
-    log: gutil.log,
+    log: _log,
   });
 }
 
-const remoteLocation = `/public_html/${settings.projectName}`;
+const remoteLocation = `/public_html/${projectName}`;
 
 const deploy = function () {
   const conn = getFtpConnection();
   return (
-    gulp
-      .src(paths.deployFiles)
+    src(paths.deployFiles)
       .pipe(conn.newer(remoteLocation))
       .pipe(conn.dest(remoteLocation))
   );
 };
 
-module.exports = deploy;
+export default deploy;

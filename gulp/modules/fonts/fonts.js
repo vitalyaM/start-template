@@ -1,17 +1,15 @@
-const gulp = require('gulp');
-const { series } = gulp;
-const del = require('del');
-const paths = require('../assets/paths');
+import { src, dest, series } from 'gulp';
+import del from 'del';
+import paths from '../assets/paths';
 
-const plumber = require('gulp-plumber');
-const ttf2woff2 = require('gulp-ttf2woff2');
+import plumber from 'gulp-plumber';
+import ttf2woff2 from 'gulp-ttf2woff2';
 
 const convert = () => {
-  return gulp
-    .src(paths.dev.fonts)
+  return src(paths.dev.fonts)
     .pipe(plumber())
     .pipe(ttf2woff2())
-    .pipe(gulp.dest(paths.dist.fonts))
+    .pipe(dest(paths.dist.fonts))
 };
 
 
@@ -22,4 +20,4 @@ const clean = (cb) => {
 
 const fonts = series(convert, clean);
 
-module.exports = fonts;
+export default fonts;
